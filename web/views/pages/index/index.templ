@@ -1,0 +1,31 @@
+package index
+
+import "github.com/ssss-tantalum/echo-kick/web/views/layouts"
+
+type IndexProps struct {
+	Title string
+}
+
+templ Show(props IndexProps) {
+	@layouts.Base(props.Title) {
+		<div class="flex flex-col justify-center text-center mt-32">
+			<h1 class="text-4xl font-bold">
+				Hello! This is <span class="text-indigo-800">Echo-Kick</span>.
+			</h1>
+			<p class="font-thin mt-4">
+				yet another Echo-Templ-HTMX Kick-Starter.
+			</p>
+		</div>
+		<div class="flex justify-center mt-10">
+			<button
+				hx-get="/api/user"
+				hx-trigger="click"
+				hx-swap="outerHTML"
+				type="button"
+				class="bg-indigo-500 text-white py-2 px-3 rounded-lg"
+			>
+				Click Me!
+			</button>
+		</div>
+	}
+}

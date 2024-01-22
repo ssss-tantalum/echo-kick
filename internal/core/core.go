@@ -3,11 +3,8 @@ package core
 import (
 	"database/sql"
 	"log"
-	"os"
-	"strconv"
 	"sync"
 
-	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/sqlitedialect"
@@ -16,43 +13,44 @@ import (
 )
 
 type App struct {
-	Echo     *echo.Echo
-	Env      string
-	HttpPort int
+	router *echo.Echo
+	config *AppConfig
 
 	dbOnce sync.Once
 	db     *bun.DB
 }
 
-func New() *App {
-	if err := godotenv.Load(); err != nil {
-		log.Println("Failed to load .env file, continuing with default values")
-	}
-
-	httpPort, _ := strconv.Atoi(GetDefaultEnv("HTTP_PORT", "3000"))
-	env := GetDefaultEnv("ENV", "development")
-
+func NewApp(config *AppConfig) *App {
 	app := &App{
-		Echo:     echo.New(),
-		Env:      env,
-		HttpPort: httpPort,
+		config: config,
 	}
+	app.initRouter()
 
 	return app
 }
 
-func (app *App) DB() *bun.DB {
-	dbName := GetDefaultEnv("DB_DATABASE", "app.db")
+func (app *App) IsDebug() bool {
+	return app.config.Debug
+}
 
+func (app *App) Config() *AppConfig {
+	return app.config
+}
+
+func (app *App) Router() *echo.Echo {
+	return app.router
+}
+
+func (app *App) DB() *bun.DB {
 	app.dbOnce.Do(func() {
-		sqldb, err := sql.Open(sqliteshim.ShimName, dbName)
+		sqldb, err := sql.Open(sqliteshim.ShimName, app.config.DbDatabase)
 		if err != nil {
 			log.Panicf("Failed to connect database, Error: %s", err)
 		}
 
 		db := bun.NewDB(sqldb, sqlitedialect.New())
 		db.AddQueryHook(bundebug.NewQueryHook(
-			bundebug.WithEnabled(false),
+			bundebug.WithEnabled(app.IsDebug()),
 			bundebug.FromEnv(""),
 		))
 
@@ -60,11 +58,4 @@ func (app *App) DB() *bun.DB {
 	})
 
 	return app.db
-}
-
-func GetDefaultEnv(key, defaultValue string) string {
-	if value, exsits := os.LookupEnv(key); exsits {
-		return value
-	}
-	return defaultValue
 }

@@ -22,8 +22,9 @@ import (
 )
 
 func main() {
-	dbName := core.GetDefaultEnv("DB_DATABASE", "app.db")
-	sqldb, err := sql.Open(sqliteshim.ShimName, dbName)
+	cfg := core.NewAppConfig()
+
+	sqldb, err := sql.Open(sqliteshim.ShimName, cfg.DbDatabase)
 	if err != nil {
 		log.Panicf("Failed to connect database, Error: %s", err)
 	}

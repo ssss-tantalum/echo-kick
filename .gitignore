@@ -1,3 +1,6 @@
+# Static files.
+web/static/*
+
 # SqliteDB
 *.db
 *.sqlite
