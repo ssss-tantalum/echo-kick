@@ -1,0 +1,31 @@
+{
+  "name": "echo-kick",
+  "version": "0.0.1",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "source": [
+    "./web/assets/scripts.js",
+    "./web/assets/styles.css"
+  ],
+  "targets": {
+    "default": {
+      "distDir": "./web/static"
+    }
+  },
+  "scripts": {
+    "watch": "parcel watch",
+    "fmt": "prettier --write .",
+    "dev": "parcel build --no-optimize",
+    "build": "parcel build"
+  },
+  "devDependencies": {
+    "parcel": "^2.11.0",
+    "prettier": "^3.2.2"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.10",
+    "daisyui": "^4.6.0",
+    "htmx.org": "^1.9.10",
+    "hyperscript.org": "^0.9.12",
+    "tailwindcss": "^3.4.1"
+  }
+}
