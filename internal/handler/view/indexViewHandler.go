@@ -18,5 +18,5 @@ func (h IndexHandler) IndexView(c echo.Context) error {
 		Title: "Echo-Kick",
 	}
 
-	return templ.RenderView(c, index.Show(props))
+	return templ.Render(c, index.Show(props))
 }

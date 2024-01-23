@@ -6,7 +6,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/ssss-tantalum/echo-kick/internal/core"
 	"github.com/ssss-tantalum/echo-kick/internal/model"
-	"github.com/ssss-tantalum/echo-kick/pkg/templ"
+	"github.com/ssss-tantalum/echo-kick/pkg/htmx"
 )
 
 type UserHandler struct {
@@ -38,5 +38,5 @@ func (h *UserHandler) ShowUser(c echo.Context) error {
 	</div>
 	`, user.Username, user.Email)
 
-	return templ.RenderHtmx(c, content)
+	return htmx.Response(c, content)
 }
