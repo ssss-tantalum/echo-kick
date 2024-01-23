@@ -18,7 +18,7 @@ type AppConfig struct {
 
 func NewAppConfig() *AppConfig {
 	if err := godotenv.Load(); err != nil {
-		log.Println("Failed to load .env file")
+		log.Fatal(err)
 	}
 
 	var cfg AppConfig

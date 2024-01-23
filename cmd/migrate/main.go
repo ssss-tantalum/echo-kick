@@ -26,7 +26,7 @@ func main() {
 
 	sqldb, err := sql.Open(sqliteshim.ShimName, cfg.DbDatabase)
 	if err != nil {
-		log.Panicf("Failed to connect database, Error: %s", err)
+		log.Fatal("Failed to connect database", err)
 	}
 
 	// Create a Bun instance. We will use it to perform queries.

@@ -45,7 +45,7 @@ func (app *App) DB() *bun.DB {
 	app.dbOnce.Do(func() {
 		sqldb, err := sql.Open(sqliteshim.ShimName, app.config.DbDatabase)
 		if err != nil {
-			log.Panicf("Failed to connect database, Error: %s", err)
+			log.Fatal(err)
 		}
 
 		db := bun.NewDB(sqldb, sqlitedialect.New())
