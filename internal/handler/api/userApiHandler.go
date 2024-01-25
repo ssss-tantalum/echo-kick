@@ -30,7 +30,7 @@ func (h *UserHandler) ShowUser(c echo.Context) error {
 
 	content := fmt.Sprintf(`
 	<div class ="flex flex-col text-center">
-		<h2>Yappi~🎉 You got HTMX-GET (/api/user) request!</h2>
+		<h2>Yappi~🎉 You've got a HTMX-GET request! ( from /api/user )</h2>
 		<ul>
 			<li class="font-thin">Created by %s</li>
 			<li class="font-thin">%s</li>
