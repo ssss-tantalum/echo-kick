@@ -1,5 +1,7 @@
 # Echo-Kick
 
+yet another Echo-Templ-HTMX Kick-Starter.
+
 ## TODO
 
 - [] Refactaring
