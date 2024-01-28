@@ -1,5 +1,5 @@
 # Templ Files
-web/views/**/*_templ.go
+web/**/*_templ.go
 
 # Static files.
 web/static/*
