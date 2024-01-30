@@ -3,7 +3,7 @@ module github.com/ssss-tantalum/echo-kick
 go 1.21.6
 
 require (
-	github.com/a-h/templ v0.2.513
+	github.com/a-h/templ v0.2.543
 	github.com/angelofallars/htmx-go v0.4.1
 	github.com/caarlos0/env/v10 v10.0.0
 	github.com/joho/godotenv v1.5.1
