@@ -6,6 +6,9 @@ build:
 run: generate build
 	@./bin/echo_kick
 
+init:
+	@templ generate && npm install
+
 generate:
 	@templ generate && npm run build
 
